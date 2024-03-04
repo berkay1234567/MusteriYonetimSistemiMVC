@@ -1,0 +1,6 @@
+@MusteriYonetimSistemi.API_HostAddress = http://localhost:5219
+
+GET {{MusteriYonetimSistemi.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

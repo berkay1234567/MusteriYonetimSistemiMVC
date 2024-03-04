@@ -1,0 +1,165 @@
+﻿
+@model IEnumerable<MusteriYonetimSistemi.Models.Customer>
+@if (ViewBag.customer != null)
+{
+    <span class="alert alert-danger"> @ViewBag.customer</span>
+}
+
+<a class="new-person btn btn-dark" asp-controller="Customer" asp-action="CreateCustomer">  Create  <i class="bi bi-person-plus"></i></a>
+<div class="tablo">
+
+
+    <table id="customerTable" class="table table-striped"> 
+        <caption>Customer Data</caption>
+        <thead>
+            <tr>
+                <th>CustomerID</th>
+                <th>CustomerName</th>
+                <th>CustomerSurName</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Region</th>
+                <th>PostalCode</th>
+                <th>Country</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody >
+            <!-- Customer data will be dynamically added here -->
+        
+                @foreach(var item in Model)
+                {
+                <tr>
+                    <td>@item.CustomerID</td>
+                    <td>@item.CustomerName</td>
+                    <td>@item.CustomerSurName</td>
+                    <td>@item.Address</td>
+                    <td>@item.City</td>
+                    <td>@item.Region</td>
+                    <td>@item.PostalCode</td>
+                    <td>@item.Country</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>
+                        <div class="d-flex justify-content-around " style="margin-right:1px">
+
+                            <a href="#" class="my-button btn btn-primary btn-sm" data-target="#EditRecord" data-toggle="modal" data-id="@item.CustomerID"><i class="bi bi-pencil-square"></i></a>
+                            <a href="#" class="my-button-red btn btn-danger btn-sm" data-target="#DeleteRecord" data-toggle="modal" data-id="@item.CustomerID"><i class="bi bi-trash-fill"></i></a>
+                            <a href="#" class="my-button-green btn btn-outline-primary btn-xs" data-target="#OrderRecord" data-toggle="modal" data-id="@item.CustomerID">Orders</a>
+                        </div>
+
+                    </td>
+                
+                </tr>
+                }
+        
+        </tbody>
+    </table>
+
+</div>
+<partial name="PartialViews/_EditModal" />
+<partial name="PartialViews/_DeleteModal" />
+<partial name="PartialViews/_ViewOrderModal" />
+
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+@* <partial name="PartialViews/_EditModal" model="Model"/>
+ *@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="
+https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+<!-- jQuery DataTable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css" />
+<script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+
+
+    <script>
+        $('table .my-button').on('click', function () {
+            var id = $(this).data("id");
+            $.ajax({
+                type: 'POST',
+                url: 'customer/CustomerByID/',
+                data: { "CustomerID": id },
+                success: function (response) {
+                    $('#EditRecord #CustomerID').val(response.customerID)
+                    $('#EditRecord #CustomerName').val(response.customerName)
+                    $('#EditRecord #CustomerSurName').val(response.customerSurName)
+                    $('#EditRecord #Address').val(response.address)
+                    $('#EditRecord #City').val(response.city)
+                    $('#EditRecord #Region').val(response.region)
+                    $('#EditRecord #PostalCode').val(response.postalCode)
+                    $('#EditRecord #Country').val(response.country)
+                    $('#EditRecord #Phone').val(response.phone)
+                    $('#EditRecord #Email').val(response.email)
+                    $('#EditRecord #IsActive').val(response.isActive)
+
+                                
+
+                }
+            });
+        });
+
+    $('table .my-button-red').on('click', function () {
+        var id = $(this).data("id");
+        $.ajax({
+            type: 'POST',
+            url: 'customer/CustomerByID/',
+            data: { "CustomerID": id },
+            success: function (response) {
+                $('#DeleteRecord #CustomerID').val(response.customerID)
+                $('#DeleteRecord #CustomerName').val(response.customerName)
+                $('#DeleteRecord #CustomerSurName').val(response.customerSurName)
+                $('#DeleteRecord #Address').val(response.address)
+                $('#DeleteRecord #City').val(response.city)
+                $('#DeleteRecord #Region').val(response.region)
+                $('#DeleteRecord #PostalCode').val(response.postalCode)
+                $('#DeleteRecord #Country').val(response.country)
+                $('#DeleteRecord #Phone').val(response.phone)
+                $('#DeleteRecord #Email').val(response.email)
+                $('#DeleteRecord #IsActive').val(response.isActive)
+            }
+        });
+    });
+    
+
+
+    $('table .my-button-green').on('click', function () {
+        var id = $(this).data("id");
+        $.ajax({
+            type: 'POST',
+            url: '/order/GetOrderByCustomerID/',
+            data: { "CustomerID": id },
+            success: function (data) {
+                $("#order tbody").empty();
+                $.each(data, function (i, order) {
+                    var orderR = "<tr>" +
+                        "<td>" + order.orderId + "</td>" +
+                        "<td>" + order.unitPrice + "</td>" +
+                        "<td>" + order.quantity + "</td>"
+                    $("#order tbody").append(orderR);
+                });
+            } 
+        }); 
+    });
+
+
+
+    $("#customerTable").DataTable(
+    );
+        
+
+        
+    </script>
+
+    

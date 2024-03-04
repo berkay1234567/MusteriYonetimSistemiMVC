@@ -1,0 +1,83 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+/*table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}*/
+
+/* Table caption styling */
+/*caption {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}*/
+
+/* Table header (th) styling */
+/*th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: left;
+}*/
+
+/* Alternating row colors */
+/*tr:nth-child(even) {
+    background-color: #e6e6e6;
+}*/
+
+/* Table data (td) styling */
+/*td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}*/
+.my-button {
+
+}
+.my-button-green{
+
+}
+.my-button-red {
+
+}
+
+.new-person{
+    margin-left:-100px;
+}
+
+    /* Hover effect */
+.my-button:hover {
+    background-color: #2980b9;
+    color:aliceblue;
+}
+
+.tablo {
+    display: flex;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.buttonGroup{
+    display: flex;
+    justify-content:space-around;
+}
